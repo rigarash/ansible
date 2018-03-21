@@ -1,5 +1,9 @@
 - hosts: localhost
   tasks:
+  - name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
   - name: install packages
     become: true
     apt:
@@ -8,4 +12,4 @@
     with_items:
       - man-db
       - manpages-dev
-
+      - make
