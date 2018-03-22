@@ -12,6 +12,7 @@
     name: "{{item}}"
     state: present
   with_items:
+    - aptitude
     - man-db
     - manpages-dev
     - make
