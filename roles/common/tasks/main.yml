@@ -4,7 +4,7 @@
     update_cache: yes
     cache_valid_time: 3600
 
-- name: install packages
+- name: install common packages
   become: true
   apt:
     name: "{{item}}"
@@ -14,3 +14,6 @@
     - manpages-dev
     - make
     - host
+    - iputils-ping
+  when:
+    - "ansible_distribution == 'Debian'"
