@@ -1,4 +1,4 @@
-- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+- name: Update apt cache only once in 1h
   become: true
   apt:
     update_cache: yes
