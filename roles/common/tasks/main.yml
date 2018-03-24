@@ -41,3 +41,16 @@
     - vim-tiny
   when:
     - "ansible_distribution == 'Debian'"
+
+- name: install emacs25
+  become: true
+  apt:
+    name: "{{item}}"
+    state: present
+  with_items:
+    - emacs25
+    - lookup-el
+    - migemo-el
+    - elpa-magit
+  when:
+    - "ansible_distribution == 'Debian'"
