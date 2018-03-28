@@ -1,5 +1,4 @@
 - name: install common packages
-  become: true
   apt:
     name: "{{item}}"
     state: present
@@ -14,7 +13,6 @@
     - "ansible_distribution == 'Debian'"
 
 - name: install vim
-  become: true
   apt:
     name: "{{item}}"
     state: present
@@ -24,7 +22,6 @@
     - "ansible_distribution == 'Debian'"
 
 - name: uninstall vim-tiny
-  become: true
   apt:
     name: "{{item}}"
     state: absent
@@ -35,7 +32,6 @@
     - "ansible_distribution == 'Debian'"
 
 - name: install emacs25
-  become: true
   apt:
     name: "{{item}}"
     state: present
@@ -48,7 +44,6 @@
     - "ansible_distribution == 'Debian'"
 
 - name: change /etc/locale.gen properly
-  become: true
   lineinfile:
     dest: /etc/locale.gen
     regexp: "^# {{item}}"
