@@ -59,9 +59,32 @@
   when:
     - "ansible_distribution == 'Debian'"
 
-- name: clone dotfiles from github
+- block:
+
+  - name: clone dotfiles from github
+    git:
+      repo: 'ssh://git@github.com/rigarash/dotfiles.git'
+      dest: "{{ ansible_env.HOME }}/.dotfiles"
+      accept_hostkey: yes
+
+  - name: create symlinks of various configuration files 
+    file:
+      src:  '{{ ansible_env.HOME}}/.dotfiles/{{ item }}'
+      dest: '{{ ansible_env.HOME}}/{{ item }}'
+      state: link
+    with_items:
+      - .gitconfig
+      - .dircolors
+      - .zsh.d
+      - .zshrc
+
+  - name: create symlinks to openssh related files
+    file:
+      src:  '{{ ansible_env.HOME}}/.dotfiles/.ssh/{{ item }}'
+      dest: '{{ ansible_env.HOME}}/.ssh/{{ item }}'
+      state: link
+    with_items:
+       - authorized_keys
+       - config
+
   become: false
-  git:
-    repo: 'ssh://git@github.com/rigarash/dotfiles.git'
-    dest: "{{ ansible_env.HOME }}/.dotfiles"
-    accept_hostkey: yes
