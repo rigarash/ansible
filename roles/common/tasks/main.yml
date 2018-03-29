@@ -6,9 +6,10 @@
     - aptitude
     - man-db
     - manpages-dev
-    - make
     - host
     - iputils-ping
+    - make
+    - git
   when:
     - "ansible_distribution == 'Debian'"
 
@@ -57,3 +58,10 @@
     - rebuild locales database
   when:
     - "ansible_distribution == 'Debian'"
+
+- name: clone dotfiles from github
+  become: false
+  git:
+    repo: 'ssh://git@github.com/rigarash/dotfiles.git'
+    dest: "{{ ansible_env.HOME }}/.dotfiles"
+    accept_hostkey: yes
