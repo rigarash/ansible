@@ -105,3 +105,6 @@
     with_items:
       - .tmux.conf
     become: false
+
+  when:
+    - "ansible_kernel | match('.*Microsoft$')"
