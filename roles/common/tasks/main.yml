@@ -71,6 +71,7 @@
     with_items:
       - .gitconfig
       - .dircolors
+      - .python_startup
       - .zsh.d
       - .zshrc
 
