@@ -86,6 +86,11 @@
       - authorized_keys
       - config
 
+  - name: create socket folders for openssh
+    file:
+      path:  '{{ ansible_env.HOME }}/.ssh/socket'
+      state: directory
+
   become: false
 
 - block:
