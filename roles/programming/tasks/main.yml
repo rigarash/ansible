@@ -1,5 +1,23 @@
 - block:
 
+  - name: install common packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - man-db
+      - manpages-dev
+      - build-essential
+      - gdb
+
+  - name: install python3 packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - flake8
+      - pylama
+
   - name: install machine learning packages
     apt:
       name: "{{item}}"
@@ -10,5 +28,15 @@
       - python3-matplotlib
     when:
       - "ansible_distribution == 'Debian'"
+
+  - name: install c++ packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - clang
+      - clang-format
+      - iwyu
+      - libboost-dev
 
   become: true

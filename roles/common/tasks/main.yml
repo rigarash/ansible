@@ -7,11 +7,8 @@
       state: present
     with_items:
       - aptitude
-      - man-db
-      - manpages-dev
       - host
       - iputils-ping
-      - make
       - git
 
   - name: install vim
