@@ -1,6 +1,10 @@
-- name: Update apt cache only once in 1h
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-  when:
-    - "ansible_os_family == 'Debian'"
+- block:
+
+  - name: Update apt cache only once in 1h
+    apt:
+      update_cache: yes
+      cache_valid_time: 3600
+    when:
+      - "ansible_os_family == 'Debian'"
+
+  become: true
