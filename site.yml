@@ -3,7 +3,7 @@
 
 - name: common settings for wsl sites
   hosts: localhost
-
+  connection: local
   roles:
     - apt
     - common
