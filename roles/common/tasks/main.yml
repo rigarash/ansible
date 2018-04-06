@@ -1,4 +1,5 @@
 - block:
+# name: Debian GNU/Linux specific setting
 
   - name: install common packages
     apt:
@@ -56,6 +57,7 @@
     - "ansible_distribution == 'Debian'"
 
 - block:
+# name: Setting dotfiles
 
   - name: clone dotfiles from github
     git:
@@ -87,6 +89,7 @@
   become: false
 
 - block:
+# name: tmux settings
 
   - name: install tmux
     apt:
