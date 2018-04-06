@@ -10,6 +10,18 @@
       - build-essential
       - gdb
 
+  - name: install emacs25 packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - lookup-el
+      - migemo-el
+      - elpa-magit
+      - aspell
+      - aspell-en
+      - aspell-doc
+
   - name: install python3 packages
     apt:
       name: "{{ item }}"
@@ -31,9 +43,6 @@
       - python-scipy-doc
       - python-sklearn-doc
       - python-matplotlib-doc
-    when:
-      - "ansible_distribution == 'Debian'"
-
   - name: install c++ packages
     apt:
       name: "{{ item }}"
@@ -47,3 +56,5 @@
       - libboost-doc
 
   become: true
+  when:
+    - "ansible_distribution == 'Debian'"
