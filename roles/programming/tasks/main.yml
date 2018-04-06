@@ -20,7 +20,7 @@
 
   - name: install machine learning packages
     apt:
-      name: "{{item}}"
+      name: "{{ item }}"
       state: present
     with_items:
       - jupyter-notebook
