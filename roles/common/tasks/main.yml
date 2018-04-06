@@ -83,8 +83,8 @@
       dest: '{{ ansible_env.HOME}}/.ssh/{{ item }}'
       state: link
     with_items:
-       - authorized_keys
-       - config
+      - authorized_keys
+      - config
 
   become: false
 
