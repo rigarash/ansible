@@ -2,7 +2,7 @@
 # This playbook deploys the whole application stack in this site for now.
 
 - name: common settings for all sites
-  hosts: all
+  hosts: localhost
 
   roles:
     - { role: apt,         become: true }
