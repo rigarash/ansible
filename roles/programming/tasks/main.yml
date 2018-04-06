@@ -36,6 +36,7 @@
     with_items:
       - clang
       - clang-format
+      - clang-tidy
       - iwyu
       - libboost-dev
 
