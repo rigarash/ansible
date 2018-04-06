@@ -9,6 +9,7 @@
       - aptitude
       - host
       - iputils-ping
+      - psmisc
       - git
 
   - name: install vim
