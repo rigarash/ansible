@@ -1,10 +1,14 @@
-- name: install machine learning packages
-  apt:
-    name: "{{item}}"
-    state: present
-  with_items:
-    - jupyter-notebook
-    - python3-sklearn
-    - python3-matplotlib
-  when:
-    - "ansible_distribution == 'Debian'"
+- block:
+
+  - name: install machine learning packages
+    apt:
+      name: "{{item}}"
+      state: present
+    with_items:
+      - jupyter-notebook
+      - python3-sklearn
+      - python3-matplotlib
+    when:
+      - "ansible_distribution == 'Debian'"
+
+  become: true

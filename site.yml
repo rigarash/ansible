@@ -7,4 +7,4 @@
   roles:
     - apt
     - common
-    - { role: programming, become: true }
+    - programming
