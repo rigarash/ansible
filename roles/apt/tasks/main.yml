@@ -35,6 +35,11 @@
     when:
       - "ansible_distribution == 'Debian'"
 
+  - name: Remove old sources.list file
+    file:
+      path: /etc/apt/sources.list
+      state: absent
+
   - name: Update apt cache only once in 1h
     apt:
       update_cache: yes
