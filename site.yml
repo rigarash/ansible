@@ -8,6 +8,7 @@
     - apt
     - common
     - programming
+    - texlive
 
 - name: common settings for managed servers
   hosts: server

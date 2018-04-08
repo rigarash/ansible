@@ -1,0 +1,18 @@
+- block:
+# name: Install latest TeXLive
+
+  - name: Install TeXLive packages
+    apt:
+      name: '{{ item }}'
+      state: present
+    with_items:
+      - texlive
+      - texlive-latex-base-doc
+      - texlive-latex-recommended-doc
+      - texlive-fonts-recommended-doc
+      - texlive-lang-japanese
+      - texlive-publishers
+      - lmodern
+      - auctex
+
+  become: true
