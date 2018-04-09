@@ -92,14 +92,19 @@
       path:  '{{ ansible_env.HOME }}/.ssh/socket'
       state: directory
 
-  - name: create symlinks to openssh related files
+  - name: create symlink to openssh config file
     file:
       src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item }}'
       dest: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
       state: link
     with_items:
-      - authorized_keys
       - config
+
+  - name: setting up openssh authorized_keys
+    authorized_key:
+      user: '{{ ansible_env.USER }}'
+      state: present
+      key: "{{ lookup('file', '{{ ansible_env.HOME }}/.dotfiles/.ssh/authorized_keys') }}"
 
   become: false
 
