@@ -46,10 +46,12 @@
       - en_US.UTF-8 UTF-8
     notify:
       - rebuild locales database
+    when:
+      - "ansible_distribution == 'Debian'"
 
   become: true
   when:
-    - "ansible_distribution == 'Debian'"
+    - "ansible_os_family == 'Debian'"
 
 - block:
 # name: Setting dotfiles
