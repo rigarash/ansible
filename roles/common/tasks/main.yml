@@ -56,11 +56,6 @@
 - block:
 # name: Setting dotfiles
 
-  - name: create socket folders for openssh
-    file:
-      path:  '{{ ansible_env.HOME }}/.ssh/socket'
-      state: directory
-
   - name: clone dotfiles from github
     git:
       repo: 'ssh://git@github.com/rigarash/dotfiles.git'
@@ -78,6 +73,24 @@
       - .python_startup
       - .zsh.d
       - .zshrc
+
+  - name: create folders for emacs
+    file:
+      path: '{{ ansible_env.HOME }}/.emacs.d'
+      state: directory
+
+  - name: create symlinks for emacs
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/.emacs.d/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/.emacs.d/{{ item }}'
+      state: link
+    with_items:
+      - init.el
+
+  - name: create socket folders for openssh
+    file:
+      path:  '{{ ansible_env.HOME }}/.ssh/socket'
+      state: directory
 
   - name: create symlinks to openssh related files
     file:
