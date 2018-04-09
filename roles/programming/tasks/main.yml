@@ -6,9 +6,16 @@
       state: present
     with_items:
       - man-db
+      - git-doc
       - manpages-dev
       - build-essential
+      - make-doc
+      - libstdc++-6-doc
+      - gcc-doc
+      - cpp-doc
+      - glibc-doc
       - gdb
+      - gdb-doc
 
   - name: install emacs25 packages
     apt:

@@ -12,6 +12,7 @@
       - texlive-fonts-recommended-doc
       - texlive-lang-japanese
       - texlive-publishers
+      - texlive-publishers-doc
       - lmodern
       - auctex
 
