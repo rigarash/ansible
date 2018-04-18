@@ -100,6 +100,19 @@
     with_items:
       - config
 
+  - name: check whether current authorized_keys is symlink
+    stat:
+      path: '{{ ansible_env.HOME }}/.ssh/authorized_keys'
+    register: ssh_keys
+
+  - name: remove current authorized_keys when symlink
+    file:
+      path: '{{ ansible_env.HOME }}/.ssh/authorized_keys'
+      state: absent
+      follow: no
+    when:
+      ssh_keys.stat.islnk is defined and ssh_keys.stat.islnk
+
   - name: setting up openssh authorized_keys
     authorized_key:
       user: '{{ ansible_env.USER }}'
