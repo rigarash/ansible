@@ -6,8 +6,10 @@
       name: apt-transport-https
       state: present
       update_cache: no
+    when:
+      - "ansible_distribution == 'Debian'"
 
-  - name: Add official apt sources.list (https)
+  - name: Add official apt sources.list (https) (Debian)
     apt_repository:
       repo: '{{ item }}'
       state: present
@@ -23,7 +25,7 @@
     when:
       - "ansible_distribution == 'Debian'"
 
-  - name: Add official backports apt sources.list (https)
+  - name: Add official backports apt sources.list (https) (Debian)
     apt_repository:
       repo: '{{ item }}'
       state: present
@@ -35,23 +37,23 @@
     when:
       - "ansible_distribution == 'Debian'"
 
-  - name: Add official apt sources.list (http)
+  - name: Add official apt sources.list (http) (Ubuntu)
     apt_repository:
       repo: '{{ item }}'
       state: present
-      filename: bionic
+      filename: '{{ ansible_lsb.codename }}'
       update_cache: no
     with_items:
-      - deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
-      - deb-src http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse
-      - deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted
-      - deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted
-      - deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
-      - deb-src http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse
-      - deb http://archive.canonical.com/ubuntu bionic partner
-      - deb-src http://archive.canonical.com/ubuntu bionic partner
-      - deb http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse
-      - deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse
+      - "deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse"
+      - "deb-src http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse"
+      - "deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted"
+      - "deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted"
+      - "deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse"
+      - "deb-src http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse"
+      - "deb http://archive.canonical.com/ubuntu bionic partner"
+      - "deb-src http://archive.canonical.com/ubuntu bionic partner"
+      - "deb http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse"
+      - "deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse"
     when:
       - "ansible_distribution == 'Ubuntu'"
 
