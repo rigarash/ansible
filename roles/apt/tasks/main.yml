@@ -44,16 +44,16 @@
       filename: '{{ ansible_lsb.codename }}'
       update_cache: no
     with_items:
-      - "deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse"
-      - "deb-src http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse"
-      - "deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted"
-      - "deb-src http://archive.ubuntu.com/ubuntu/ bionic-updates universe multiverse restricted"
-      - "deb http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse"
-      - "deb-src http://archive.ubuntu.com/ubuntu/ bionic-backports main restricted universe multiverse"
-      - "deb http://archive.canonical.com/ubuntu bionic partner"
-      - "deb-src http://archive.canonical.com/ubuntu bionic partner"
-      - "deb http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse"
-      - "deb-src http://security.ubuntu.com/ubuntu/ bionic-security main restricted universe multiverse"
+      - "deb http://archive.ubuntu.com/ubuntu {{ ansible_lsb.codename }} main restricted universe multiverse"
+      - "deb-src http://archive.ubuntu.com/ubuntu {{ ansible_lsb.codename }} main restricted universe multiverse"
+      - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates universe multiverse restricted"
+      - "deb-src http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-updates universe multiverse restricted"
+      - "deb http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
+      - "deb-src http://archive.ubuntu.com/ubuntu/ {{ ansible_lsb.codename }}-backports main restricted universe multiverse"
+      - "deb http://archive.canonical.com/ubuntu {{ ansible_lsb.codename }} partner"
+      - "deb-src http://archive.canonical.com/ubuntu {{ ansible_lsb.codename }} partner"
+      - "deb http://security.ubuntu.com/ubuntu {{ ansible_lsb.codename }}-security main restricted universe multiverse"
+      - "deb-src http://security.ubuntu.com/ubuntu {{ ansible_lsb.codename }}-security main restricted universe multiverse"
     when:
       - "ansible_distribution == 'Ubuntu'"
 
