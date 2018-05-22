@@ -131,8 +131,6 @@
     with_items:
       - tmux
     become: true
-    when:
-      - "ansible_distribution == 'Debian'"
 
   - name: create symlinks of tmux configuration files
     file:
@@ -145,3 +143,4 @@
 
   when:
     - "ansible_kernel | match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
