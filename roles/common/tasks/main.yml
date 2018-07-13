@@ -87,6 +87,9 @@
     with_items:
       - init.el
 
+- block:
+# Setting for openssh
+
   - name: create socket folders for openssh
     file:
       path:  '{{ ansible_env.HOME }}/.ssh/socket'
@@ -118,6 +121,15 @@
       user: '{{ ansible_env.USER }}'
       state: present
       key: "{{ lookup('file', '{{ ansible_env.HOME }}/.dotfiles/.ssh/authorized_keys') }}"
+
+  - name: setting up openssh private keys
+    stat:
+      path: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
+    register: '{{ item }}'
+    with_items:
+      - id_rsa
+      - id_rsa_v2
+      - id_ecdsa
 
   become: false
 
