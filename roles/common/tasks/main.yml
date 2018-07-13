@@ -87,6 +87,8 @@
     with_items:
       - init.el
 
+  become: false
+
 - block:
 # Setting for openssh
 
@@ -122,14 +124,33 @@
       state: present
       key: "{{ lookup('file', '{{ ansible_env.HOME }}/.dotfiles/.ssh/authorized_keys') }}"
 
-  - name: setting up openssh private keys
+  - name: check openssh private keys
     stat:
       path: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
-    register: '{{ item }}'
+    register: private_keys
     with_items:
       - id_rsa
       - id_rsa_v2
       - id_ecdsa
+
+  - name: remove wrong openssh private keys
+    file:
+      path: '{{ item.stat.path }}'
+      state: absent
+      follow: no
+    when:
+      - item.stat.lnk_source is exists
+      - item.stat.lnk_source is not match( '{{ ansible_env.USERPROFILE }}/home/ssh_private/{{ item.item }}' )
+    with_items:
+      - '{{ private_keys.results }}'
+
+  - name: setting up symlinks of openssh private keys
+    file:
+      src:  '{{ ansible_env.USERPROFILE }}/home/ssh_private/{{ item.item }}'
+      dest: '{{ item.stat.path }}'
+      state: link
+    with_items:
+      - '{{ private_keys.results }}'
 
   become: false
 
