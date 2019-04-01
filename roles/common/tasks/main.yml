@@ -19,6 +19,11 @@
       - .zsh.d
       - .zshrc
 
+  - name: change shell to zsh
+    user:
+      name: rigarash
+      shell: /bin/zsh
+
   - name: create folders for emacs
     file:
       path: '{{ ansible_env.HOME }}/.emacs.d'
