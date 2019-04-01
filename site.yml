@@ -7,6 +7,7 @@
   roles:
     - apt
     - common
+    - wsl
     - programming
     - texlive
 
