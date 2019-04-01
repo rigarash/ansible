@@ -11,6 +11,7 @@
       - iputils-ping
       - psmisc
       - git
+      - locales
 
   - name: install vim
     apt:
