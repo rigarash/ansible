@@ -7,6 +7,18 @@
       dest: '{{ ansible_env.HOME }}/.dotfiles'
       accept_hostkey: yes
 
+  - name: move original various configuration files
+    command: mv '{{ ansible_env.HOME }}/{{ item }}' '{{ ansible_env.HOME }}/{{ item }}.orig'
+    args:
+      creates: '{{ ansible_env.HOME }}/{{ item }}.orig'
+      removes: '{{ ansible_env.HOME }}/{{ item }}'
+    with_items:
+      - .gitconfig
+      - .dircolors
+      - .python_startup
+      - .zsh.d
+      - .zshrc
+
   - name: create symlinks of various configuration files 
     file:
       src:  '{{ ansible_env.HOME }}/.dotfiles/{{ item }}'
@@ -23,6 +35,8 @@
     user:
       name: rigarash
       shell: /bin/zsh
+    when:
+      - "ansible_os_family == 'Debian'"
 
   - name: create folders for emacs
     file:
@@ -89,7 +103,8 @@
       state: absent
       follow: no
     when:
-      - item.stat.lnk_source is exists
+      - item.stat.islnk is defined
+      - item.stat.islnk
       - item.stat.lnk_source is not match( '{{ ansible_env.USERPROFILE }}/home/ssh_private/{{ item.item }}' )
     with_items:
       - '{{ private_keys.results }}'
@@ -99,7 +114,15 @@
       src:  '{{ ansible_env.USERPROFILE }}/home/ssh_private/{{ item.item }}'
       dest: '{{ item.stat.path }}'
       state: link
+    when:
+      - item.stat.path is defined
     with_items:
       - '{{ private_keys.results }}'
+
+  - name: fixing mode of .ssh/config
+    file:
+      path: '{{ ansible_env.HOME }}/.ssh/config'
+      mode: '600'
+      follow: yes
 
   become: false
