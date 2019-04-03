@@ -77,7 +77,7 @@
   - name: install common packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - aptitude
       - host
@@ -89,7 +89,7 @@
   - name: install vim
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - vim
 
@@ -104,7 +104,7 @@
   - name: install emacs25
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - emacs25
 

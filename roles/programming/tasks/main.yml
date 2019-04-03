@@ -4,7 +4,7 @@
   - name: install common packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - man-db
       - git-doc
@@ -21,7 +21,7 @@
   - name: install emacs25 packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - emacs25
       - lookup-el
@@ -35,16 +35,18 @@
   - name: install python3 packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
+      - python3
       - python3-doc
       - flake8
       - pylama
+      - yapf3
 
   - name: install machine learning packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - jupyter-notebook
       - python3-sklearn
@@ -57,7 +59,7 @@
   - name: install c++ packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - clang
       - clang-format
@@ -69,7 +71,7 @@
   - name: install performance analysis packages
     apt:
       name: "{{ item }}"
-      state: present
+      state: latest
     with_items:
       - linux-perf
 
