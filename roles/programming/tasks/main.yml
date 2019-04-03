@@ -1,4 +1,5 @@
 - block:
+# name: Setting up packages for Debian
 
   - name: install common packages
     apt:
@@ -7,8 +8,8 @@
     with_items:
       - man-db
       - git-doc
-      - manpages-dev
       - build-essential
+      - manpages-dev
       - make-doc
       - libstdc++-6-doc
       - gcc-doc
@@ -22,12 +23,14 @@
       name: "{{ item }}"
       state: present
     with_items:
+      - emacs25
       - lookup-el
       - migemo-el
       - elpa-magit
       - aspell
       - aspell-en
       - aspell-doc
+      - global
 
   - name: install python3 packages
     apt:
@@ -50,6 +53,7 @@
       - python-scipy-doc
       - python-sklearn-doc
       - python-matplotlib-doc
+
   - name: install c++ packages
     apt:
       name: "{{ item }}"
@@ -61,6 +65,13 @@
       - iwyu
       - libboost-dev
       - libboost-doc
+
+  - name: install performance analysis packages
+    apt:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - linux-perf
 
   become: true
   when:
