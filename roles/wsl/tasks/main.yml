@@ -1,5 +1,5 @@
-- block:
-# name: tmux settings
+- name: tmux settings
+  block:
 
   - name: install tmux
     apt:

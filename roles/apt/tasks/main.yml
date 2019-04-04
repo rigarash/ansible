@@ -1,5 +1,5 @@
-- block:
-# name: Setting up apt repositories for Debian
+- name: Setting up apt repositories for Debian
+  block:
 
   - name: Add apt-transport-https package
     apt:
@@ -73,8 +73,8 @@
   when:
     - "ansible_os_family == 'Debian'"
 
-- block:
-# name: Debian GNU/Linux specific setting
+- name: Debian GNU/Linux specific setting
+  block:
 
   - name: install common packages
     apt:

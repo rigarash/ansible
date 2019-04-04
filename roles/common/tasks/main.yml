@@ -1,5 +1,5 @@
-- block:
-# name: Setting dotfiles
+- name: Setting dotfiles
+  block:
 
   - name: clone dotfiles from github
     git:
@@ -57,8 +57,8 @@
 
   become: false
 
-- block:
-# Setting for openssh
+- name: Setting for openssh
+  block:
 
   - name: create socket folders for openssh
     file:

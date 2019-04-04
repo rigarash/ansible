@@ -1,5 +1,5 @@
-- block:
-# name: Install latest TeXLive
+- name: Install latest TeXLive
+  block:
 
   - name: Install TeXLive packages
     apt:

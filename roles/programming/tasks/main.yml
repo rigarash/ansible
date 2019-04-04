@@ -1,5 +1,5 @@
-- block:
-# name: Setting up packages for Debian
+- name: Setting up packages for Debian
+  block:
 
   - name: install common packages
     apt:
