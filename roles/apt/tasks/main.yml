@@ -134,7 +134,7 @@
       state: latest
     vars:
       packages:
-      - emacs
+      - emacs25
     when:
       - "ansible_distribution == 'Ubuntu'"
 
