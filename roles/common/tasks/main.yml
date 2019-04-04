@@ -109,7 +109,7 @@
     when:
       - item.stat.islnk is defined
       - item.stat.islnk
-      - item.stat.lnk_source is not match( '{{ ansible_env.USERPROFILE }}/home/ssh_private/{{ item.item }}' )
+      - item.stat.lnk_source is not search( ansible_env.USERPROFILE + '/home/ssh_private/' + item.item )
     with_items:
       - '{{ private_keys.results }}'
 
