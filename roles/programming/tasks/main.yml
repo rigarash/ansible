@@ -11,15 +11,15 @@
       - git-doc
       - build-essential
       - manpages-dev
-#      - make-doc
+      - make-doc
 #      - libstdc++-6-doc
 #      - gcc-doc
 #      - cpp-doc
 #      - glibc-doc
       - gdb
-#      - gdb-doc
+      - gdb-doc
 
-  - name: install emacs25 packages
+  - name: install emacs packages
     apt:
       name: "{{ packages }}"
       state: latest
