@@ -1,0 +1,7 @@
+- name: run fc-cache
+  shell: fc-cache
+  become: false
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
+

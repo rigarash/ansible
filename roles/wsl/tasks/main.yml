@@ -3,9 +3,10 @@
 
   - name: install tmux
     apt:
-      name: "{{ item }}"
-      state: present
-    with_items:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
       - tmux
     become: true
 
@@ -30,11 +31,10 @@
       src:  /mnt/c/Windows/Fonts
       dest: '{{ ansible_env.HOME }}/.local/share/fonts/win'
       state: link
+    notify:
+      - run fc-cache
     become: false
 
-  - name: run fc-cache
-    shell: fc-cache
-
   when:
-    - "ansible_kernel | match('.*Microsoft$')"
+    - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
