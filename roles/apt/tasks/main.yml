@@ -8,6 +8,7 @@
       update_cache: no
     when:
       - "ansible_distribution == 'Debian'"
+      - "ansible_distribution_version is search('stretch')"
 
   - name: Add official apt sources.list (https) (Debian)
     apt_repository:
@@ -36,7 +37,7 @@
       - 'deb-src https://deb.debian.org/debian {{ ansible_lsb.codename }}-backports main contrib non-free'
     when:
       - "ansible_distribution == 'Debian'"
-      - "ansible_distribution_version | regex_search('stretch')"
+      - "ansible_distribution_version is search('stretch')"
 
   - name: Add official apt sources.list (http) (Ubuntu)
     apt_repository:
@@ -77,9 +78,10 @@
 
   - name: install common packages
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: latest
-    with_items:
+    vars:
+      packages:
       - aptitude
       - host
       - iputils-ping
@@ -90,44 +92,48 @@
 
   - name: install vim
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: latest
-    with_items:
+    vars:
+      packages:
       - vim
 
   - name: uninstall vim-tiny
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: absent
-      purge: yes
-    with_items:
+    vars:
+      packages:
       - vim-tiny
 
   - name: install emacs (on buster and sid)
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: latest
-    with_items:
+    vars:
+      packages:
       - emacs
     when:
       - "ansible_distribution == 'Debian'"
-      - "ansible_distribution_version | regex_search('buster|sid')"
+      - "ansible_distribution_version is search('buster|sid')"
 
   - name: install emacs25 (on stretch)
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: latest
-    with_items:
+    vars:
+      packages:
       - emacs25
     when:
       - "ansible_distribution == 'Debian'"
-      - "ansible_distribution_version | regex_search('stretch')"
+      - "ansible_distribution_version is search('stretch')"
 
   - name: install emacs (on Ubuntu)
     apt:
-      name: "{{ item }}"
+      name: "{{ packages }}"
       state: latest
-    with_items:
+    vars:
+      packages:
       - emacs
     when:
       - "ansible_distribution == 'Ubuntu'"
