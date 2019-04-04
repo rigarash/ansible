@@ -4,6 +4,9 @@
 - name: common settings for wsl sites
   hosts: localhost
   connection: local
+  pre_tasks:
+    - include:
+        pre_tasks/version_check.yml
   roles:
     - apt
     - common
@@ -15,6 +18,8 @@
   hosts: server
   gather_facts: False
   pre_tasks:
+    - include:
+        pre_tasks/version_check.yml
     - setup:
         gather_subset: "!ohai"
   roles:
@@ -25,6 +30,8 @@
   hosts: cluster
   gather_facts: False
   pre_tasks:
+    - include:
+        pre_tasks/version_check.yml
     - setup:
         gather_subset: "!ohai"
   roles:
