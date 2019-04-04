@@ -84,7 +84,8 @@
       state: absent
       follow: no
     when:
-      ssh_keys.stat.islnk is defined and ssh_keys.stat.islnk
+      - ssh_keys.stat.islnk is defined
+      - ssh_keys.stat.islnk
 
   - name: setting up openssh authorized_keys
     authorized_key:
