@@ -13,6 +13,7 @@
       creates: '{{ ansible_env.HOME }}/{{ item }}.orig'
       removes: '{{ ansible_env.HOME }}/{{ item }}'
     when:
+      - item.stat is defined
       - item.stat.isreg is defined
       - item.stat.isreg
     with_items:

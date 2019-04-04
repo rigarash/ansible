@@ -10,20 +10,19 @@
       - git-doc
       - build-essential
       - manpages-dev
-      - make-doc
-      - libstdc++-6-doc
-      - gcc-doc
-      - cpp-doc
-      - glibc-doc
+#      - make-doc
+#      - libstdc++-6-doc
+#      - gcc-doc
+#      - cpp-doc
+#      - glibc-doc
       - gdb
-      - gdb-doc
+#      - gdb-doc
 
   - name: install emacs25 packages
     apt:
       name: "{{ item }}"
       state: latest
     with_items:
-      - emacs25
       - lookup-el
       - migemo-el
       - elpa-magit

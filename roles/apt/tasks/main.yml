@@ -36,6 +36,7 @@
       - 'deb-src https://deb.debian.org/debian {{ ansible_lsb.codename }}-backports main contrib non-free'
     when:
       - "ansible_distribution == 'Debian'"
+      - "ansible_distribution_version | regex_search('stretch')"
 
   - name: Add official apt sources.list (http) (Ubuntu)
     apt_repository:
@@ -85,6 +86,7 @@
       - psmisc
       - git
       - locales
+      - openssh-client
 
   - name: install vim
     apt:
@@ -101,12 +103,34 @@
     with_items:
       - vim-tiny
 
-  - name: install emacs25
+  - name: install emacs (on buster and sid)
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - emacs
+    when:
+      - "ansible_distribution == 'Debian'"
+      - "ansible_distribution_version | regex_search('buster|sid')"
+
+  - name: install emacs25 (on stretch)
     apt:
       name: "{{ item }}"
       state: latest
     with_items:
       - emacs25
+    when:
+      - "ansible_distribution == 'Debian'"
+      - "ansible_distribution_version | regex_search('stretch')"
+
+  - name: install emacs (on Ubuntu)
+    apt:
+      name: "{{ item }}"
+      state: latest
+    with_items:
+      - emacs
+    when:
+      - "ansible_distribution == 'Ubuntu'"
 
   - name: change /etc/locale.gen properly
     lineinfile:
