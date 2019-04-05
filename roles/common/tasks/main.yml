@@ -5,6 +5,7 @@
     git:
       repo: 'ssh://git@github.com/rigarash/dotfiles.git'
       dest: '{{ ansible_env.HOME }}/.dotfiles'
+      update: yes
       accept_hostkey: yes
 
   - name: move original various configuration files
