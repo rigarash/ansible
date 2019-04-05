@@ -1,0 +1,7 @@
+- name: add Julia packages
+  command: julia -e 'using Pkg; Pkg.add("{{ item }}")'
+  with_items:
+    - IJulia
+  when:
+    - "ansible_distribution == 'Debian'"
+    - "ansible_distribution_version is search('buster')"

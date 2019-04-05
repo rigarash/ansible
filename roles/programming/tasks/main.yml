@@ -99,7 +99,7 @@
     when:
       "ansible_kernel is not match('.*Microsoft$')"
 
-  - name: install julia package (buster)
+  - name: install Julia package (buster)
     apt:
       name: "{{ packages }}"
       state: latest
@@ -107,6 +107,8 @@
       packages:
       - julia
       - julia-doc
+    notify:
+      - add Julia packages
     when:
       - "ansible_distribution_version is search('buster')"
 
