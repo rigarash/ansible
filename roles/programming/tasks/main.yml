@@ -99,6 +99,17 @@
     when:
       "ansible_kernel is not match('.*Microsoft$')"
 
+  - name: install julia package (buster)
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - julia
+      - julia-doc
+    when:
+      - "ansible_distribution_version is search('buster')"
+
   become: true
   when:
     - "ansible_distribution == 'Debian'"
