@@ -7,17 +7,33 @@
       state: latest
     vars:
       packages:
+      - build-essential
+      - gdb
+
+  - name: install documentation packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
       - man-db
       - git-doc
-      - build-essential
       - manpages-dev
       - make-doc
-#      - libstdc++-6-doc
 #      - gcc-doc
 #      - cpp-doc
-#      - glibc-doc
-      - gdb
+      - glibc-doc
       - gdb-doc
+
+  - name: install libstdc++ documentation package (buster)
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - libstdc++-8-doc
+    when:
+      - "ansible_distribution_version is search('buster')"
 
   - name: install emacs packages
     apt:
@@ -26,7 +42,7 @@
     vars:
       packages:
       - lookup-el
-      - migemo-el
+      - elpa-migemo
       - elpa-magit
       - elpa-yaml-mode
       - aspell
