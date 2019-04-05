@@ -102,6 +102,7 @@
     apt:
       name: "{{ packages }}"
       state: absent
+      purge: yes
     vars:
       packages:
       - vim-tiny
@@ -110,6 +111,7 @@
     apt:
       name: "{{ packages }}"
       state: latest
+      install_recommends: yes
     vars:
       packages:
       - emacs
@@ -121,6 +123,7 @@
     apt:
       name: "{{ packages }}"
       state: latest
+      install_recommends: yes
     vars:
       packages:
       - emacs25
@@ -132,6 +135,7 @@
     apt:
       name: "{{ packages }}"
       state: latest
+      install_recommends: yes
     vars:
       packages:
       - emacs25
