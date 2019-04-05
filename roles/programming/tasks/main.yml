@@ -28,6 +28,7 @@
       - lookup-el
       - migemo-el
       - elpa-magit
+      - elpa-yaml-mode
       - aspell
       - aspell-en
       - aspell-doc
