@@ -68,7 +68,7 @@
       state: latest
     vars:
       packages:
-      - jupyter-notebook
+      - jupyter
       - python3-sklearn
       - python3-matplotlib
       - python-numpy-doc
