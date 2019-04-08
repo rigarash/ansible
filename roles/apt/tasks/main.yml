@@ -89,6 +89,7 @@
       - git
       - locales
       - openssh-client
+      - rsync
 
   - name: install vim
     apt:
