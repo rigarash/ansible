@@ -17,6 +17,8 @@
       - item.stat is defined
       - item.stat.isreg is defined
       - item.stat.isreg
+      - item.stat.islnk is defined
+      - item.stat.islnk == False
     with_items:
       - .gitconfig
       - .dircolors
@@ -35,6 +37,14 @@
       - .python_startup
       - .zsh.d
       - .zshrc
+
+  - name: change .gitconfig on RICOS
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/.gitconfig-ricos'
+      dest: '{{ ansible_env.HOME }}/.gitconfig'
+      state: link
+    when:
+      - "'ricos' in group_names"
 
   - name: change shell to zsh
     user:
