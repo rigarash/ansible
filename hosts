@@ -8,6 +8,9 @@ localhost
 microserver.rigarash.info
 ri-ml370g6.cspp.cc.u-tokyo.ac.jp
 
-[cluster]
+[ricos]
 savanna.ritc.jp
 #jungle.ritc.jp
+
+[cluster:children]
+ricos
