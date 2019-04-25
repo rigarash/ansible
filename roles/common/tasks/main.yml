@@ -9,10 +9,21 @@
       accept_hostkey: yes
 
   - name: move original various configuration files
-    command: mv '{{ ansible_env.HOME }}/{{ item }}' '{{ ansible_env.HOME }}/{{ item }}.orig'
+    stat:
+      path: '{{ ansible_env.HOME }}/{{ item }}'
+    with_items:
+      - .gitconfig
+      - .dircolors
+      - .python_startup
+      - .zsh.d
+      - .zshrc
+    register: conffiles
+
+  - name: move original various configuration files
+    command: mv '{{ ansible_env.HOME }}/{{ item.item }}' '{{ ansible_env.HOME }}/{{ item.item }}.orig'
     args:
-      creates: '{{ ansible_env.HOME }}/{{ item }}.orig'
-      removes: '{{ ansible_env.HOME }}/{{ item }}'
+      creates: '{{ ansible_env.HOME }}/{{ item.item }}.orig'
+      removes: '{{ ansible_env.HOME }}/{{ item.item }}'
     when:
       - item.stat is defined
       - item.stat.isreg is defined
@@ -20,11 +31,7 @@
       - item.stat.islnk is defined
       - item.stat.islnk == False
     with_items:
-      - .gitconfig
-      - .dircolors
-      - .python_startup
-      - .zsh.d
-      - .zshrc
+      - '{{ conffiles.results }}'
 
   - name: create symlinks of various configuration files 
     file:
@@ -97,12 +104,15 @@
     when:
       - ssh_keys.stat.islnk is defined
       - ssh_keys.stat.islnk
+      - ssh_keys.stat.lnk_source is not search('\.dotfiles')
 
-  - name: setting up openssh authorized_keys
-    authorized_key:
-      user: '{{ ansible_env.USER }}'
-      state: present
-      key: "{{ lookup('file', '{{ ansible_env.HOME }}/.dotfiles/.ssh/authorized_keys') }}"
+  - name: create symlink to openssh authorized_keys
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
+      state: link
+    with_items:
+      - authorized_keys
 
   - name: check openssh private keys
     stat:
