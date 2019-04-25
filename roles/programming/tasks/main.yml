@@ -45,6 +45,7 @@
       - elpa-migemo
       - elpa-magit
       - elpa-yaml-mode
+      - elpa-markdown-mode
       - aspell
       - aspell-en
       - aspell-doc
