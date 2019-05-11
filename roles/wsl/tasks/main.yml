@@ -19,6 +19,13 @@
       - .tmux.conf
     become: false
 
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
+
+- name: font settings
+  block:
+
   - name: prepare Windows fonts directory for WSL
     file:
       path: '{{ ansible_env.HOME }}/.local/share/fonts'
@@ -34,6 +41,21 @@
     notify:
       - run fc-cache
     become: false
+
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
+
+- name: GnuPG settings
+  block:
+
+  - name: create symlinks of gpg related script files
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/bin/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/bin/{{ item}}'
+      state: link
+    with_items:
+      - remote-gpg
 
   when:
     - "ansible_kernel is match('.*Microsoft$')"
