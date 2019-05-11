@@ -83,14 +83,6 @@
       path:  '{{ ansible_env.HOME }}/.ssh/socket'
       state: directory
 
-  - name: create symlink to openssh config file
-    file:
-      src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item }}'
-      dest: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
-      state: link
-    with_items:
-      - config
-
   - name: check whether current authorized_keys is symlink
     stat:
       path: '{{ ansible_env.HOME }}/.ssh/authorized_keys'
@@ -106,12 +98,14 @@
       - ssh_keys.stat.islnk
       - ssh_keys.stat.lnk_source is not search('\.dotfiles')
 
-  - name: create symlink to openssh authorized_keys
-    file:
+  - name: copy openssh configuration files
+    copy:
       src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item }}'
       dest: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
-      state: link
+      remote_src: yes
+      backup: yes
     with_items:
+      - config
       - authorized_keys
 
   - name: check openssh private keys
