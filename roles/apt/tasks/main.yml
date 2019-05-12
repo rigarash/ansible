@@ -10,6 +10,15 @@
       - "ansible_distribution == 'Debian'"
       - "ansible_distribution_version is search('stretch')"
 
+  - name: Remove apt-transport-https package
+    apt:
+      name: apt-transport-https
+      state: absent
+      update_cache: no
+    when:
+      - "ansible_distribution == 'Debian'"
+      - "ansible_distribution_version is not search('stretch')"
+
   - name: Add official apt sources.list (https) (Debian)
     apt_repository:
       repo: '{{ item }}'
