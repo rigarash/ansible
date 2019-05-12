@@ -61,7 +61,7 @@
     lineinfile:
       dest: '{{ ansible_env.HOME }}/.ssh/config'
       regexp: '^\s*IdentityAgent'
-      line: '  IdentityAgent ~/.gnupg/S.gpg-agent.ssh'
+      line: '  IdentityAgent {{ sshsocket }}'
       state: present
 
   when:

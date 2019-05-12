@@ -145,4 +145,23 @@
       mode: '600'
       follow: yes
 
+  - name: find location of gpg-agent socket
+    shell: gpgconf --list-dirs agent-socket
+    register: gpg_socket
+    run_once: true
+    args:
+      executable: /bin/zsh
+
+  - name: find location of gpg-agent ssh socket
+    shell: gpgconf --list-dirs agent-ssh-socket
+    register: gpg_ssh_socket
+    run_once: true
+    args:
+      executable: /bin/zsh
+
+  - set_fact:
+      gpgsocket: '{{ gpg_socket.stdout }}'
+      sshsocket: '{{ gpg_ssh_socket.stdout }}'
+      cacheable: true
+
   become: false
