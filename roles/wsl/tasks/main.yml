@@ -57,6 +57,13 @@
     with_items:
       - remote-gpg
 
+  - name: Point IdentityAgent to gpg-agent
+    lineinfile:
+      dest: '{{ ansible_env.HOME }}/.ssh/config'
+      regexp: '^\s*IdentityAgent'
+      line: '  IdentityAgent ~/.gnupg/S.gpg-agent.ssh'
+      state: present
+
   when:
     - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
