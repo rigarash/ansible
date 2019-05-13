@@ -49,6 +49,29 @@
 - name: GnuPG settings
   block:
 
+  - name: install GnuPG management packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - gpg-agent
+      - pinentry-qt
+      - dirmngr
+
+  - name: make sure that pinentry-* other than qt are uninstalled
+    apt:
+      name: "{{ packages }}"
+      state: absent
+    vars:
+      packages:
+      - pinentry-tty
+      - pinentry-curses
+      - pinentry-gnome3
+      - pinentry-gtk2
+      - pinentry-fltk
+      - pinentry-qt4
+
   - name: create symlinks of gpg related script files
     file:
       src:  '{{ ansible_env.HOME }}/.dotfiles/bin/{{ item }}'

@@ -99,6 +99,7 @@
       - locales
       - openssh-client
       - rsync
+      - gpg
 
   - name: install vim
     apt:
