@@ -75,12 +75,12 @@
       - jupyter
       - python3-sklearn
       - python3-pandas
-      - python3-pandas-doc
       - python3-matplotlib
       - python-numpy-doc
       - python-scipy-doc
       - python-sklearn-doc
       - python-matplotlib-doc
+      - python-pandas-doc
 
   - name: install c++ packages
     apt:
