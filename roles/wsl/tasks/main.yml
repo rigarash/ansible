@@ -90,3 +90,17 @@
   when:
     - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
+
+- name: Emacs settings
+  block:
+
+  - name: symlink EPWING folder
+    file:
+      src:  '{{ ansible_env.HOME }}/win/OneDrive/EPWING'
+      dest: '{{ ansible_env.HOME }}/EPWING'
+      state: link
+
+  become: false
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
