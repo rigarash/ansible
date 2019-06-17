@@ -58,6 +58,7 @@
       - gpg-agent
       - pinentry-qt
       - dirmngr
+    become: True
 
   - name: make sure that pinentry-* other than qt are uninstalled
     apt:
@@ -71,11 +72,17 @@
       - pinentry-gtk2
       - pinentry-fltk
       - pinentry-qt4
+    become: True
+
+  - name: make sure that $HOME/bin directory is present
+    file:
+      path: '{{ ansible_env.HOME }}/bin'
+      state: directory
 
   - name: create symlinks of gpg related script files
     file:
       src:  '{{ ansible_env.HOME }}/.dotfiles/bin/{{ item }}'
-      dest: '{{ ansible_env.HOME }}/bin/{{ item}}'
+      dest: '{{ ansible_env.HOME }}/bin/{{ item }}'
       state: link
     with_items:
       - remote-gpg
