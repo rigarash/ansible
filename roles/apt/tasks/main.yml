@@ -82,7 +82,7 @@
   when:
     - "ansible_os_family == 'Debian'"
 
-- name: Debian GNU/Linux specific setting
+- name: Package preparation on Debian GNU/Linux based distribution
   block:
 
   - name: install common packages
@@ -100,6 +100,9 @@
       - openssh-client
       - rsync
       - gpg
+      - htop
+      - strace
+      - lsof
 
   - name: install vim
     apt:
