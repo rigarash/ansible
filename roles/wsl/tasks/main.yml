@@ -111,3 +111,31 @@
   when:
     - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
+
+- name: email settings
+  block:
+
+  - name: symlink email setting files
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/{{ item }}'
+      state: link
+    with_items:
+      - .mutt
+      - .msmtprc
+      - .signature.d
+    become: false
+
+  - name: install msmtp and mutt
+    apt:
+      name: '{{ packages }}'
+      state: latest
+    vars:
+      packages:
+      - mutt
+      - msmtp
+    become: true
+
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
