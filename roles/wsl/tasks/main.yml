@@ -1,3 +1,9 @@
+- name: /etc/wsl.conf settings
+  block:
+
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+
 - name: tmux settings
   block:
 
