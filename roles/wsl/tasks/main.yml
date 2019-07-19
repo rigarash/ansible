@@ -94,6 +94,7 @@
       line: '  IdentityAgent {{ sshsocket }}'
       state: present
 
+  become: false
   when:
     - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
