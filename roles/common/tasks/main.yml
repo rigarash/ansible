@@ -5,6 +5,7 @@
     git:
       repo: 'ssh://git@github.com/rigarash/dotfiles.git'
       dest: '{{ ansible_env.HOME }}/.dotfiles'
+      version: 'master'
       update: yes
       accept_hostkey: yes
 
