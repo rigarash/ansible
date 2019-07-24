@@ -159,7 +159,8 @@
     args:
       executable: /bin/zsh
 
-  - set_fact:
+  - name: Set location of GnuPG and ssh socket
+    set_fact:
       gpgsocket: '{{ gpg_socket.stdout }}'
       sshsocket: '{{ gpg_ssh_socket.stdout }}'
       cacheable: true
