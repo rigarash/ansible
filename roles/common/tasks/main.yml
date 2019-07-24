@@ -33,7 +33,7 @@
     with_items:
       - '{{ conffiles.results }}'
 
-  - name: create symlinks of various configuration files 
+  - name: create symlinks of various configuration files
     file:
       src:  '{{ ansible_env.HOME }}/.dotfiles/{{ item }}'
       dest: '{{ ansible_env.HOME }}/{{ item }}'
