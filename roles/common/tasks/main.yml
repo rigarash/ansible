@@ -29,7 +29,7 @@
       - item.stat.isreg is defined
       - item.stat.isreg
       - item.stat.islnk is defined
-      - item.stat.islnk == False
+      - not item.stat.islnk
     with_items:
       - '{{ conffiles.results }}'
 
