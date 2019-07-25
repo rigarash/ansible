@@ -20,7 +20,8 @@
   pre_tasks:
     - include:
         pre_tasks/version_check.yml
-    - setup:
+    - name: Collect facts except Ohai
+      setup:
         gather_subset: "!ohai"
   roles:
     - apt
@@ -32,7 +33,8 @@
   pre_tasks:
     - include:
         pre_tasks/version_check.yml
-    - setup:
+    - name: Collect facts except Ohai
+      setup:
         gather_subset: "!ohai"
   roles:
     - common
