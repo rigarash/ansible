@@ -1,6 +1,14 @@
 - name: /etc/wsl.conf settings
   block:
 
+  - name: create /etc/wsl.conf on wsl machine
+    template:
+      src: wsl.conf.j2
+      dest: /etc/wsl.conf
+      owner: root
+      mode: '0644'
+    become: true
+
   when:
     - "ansible_kernel is match('.*Microsoft$')"
 
