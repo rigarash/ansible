@@ -1,5 +1,5 @@
 - name: run fc-cache
-  shell: fc-cache
+  command: fc-cache
   become: false
   when:
     - "ansible_kernel is match('.*Microsoft$')"
