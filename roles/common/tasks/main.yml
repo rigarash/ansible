@@ -147,18 +147,14 @@
       follow: yes
 
   - name: find location of gpg-agent socket
-    shell: gpgconf --list-dirs agent-socket
+    command: /bin/zsh -c "gpgconf --list-dirs agent-socket"
     register: gpg_socket
     run_once: true
-    args:
-      executable: /bin/zsh
 
   - name: find location of gpg-agent ssh socket
-    shell: gpgconf --list-dirs agent-ssh-socket
+    command: /bin/zsh -c "gpgconf --list-dirs agent-ssh-socket"
     register: gpg_ssh_socket
     run_once: true
-    args:
-      executable: /bin/zsh
 
   - name: Set location of GnuPG and ssh socket
     set_fact:
