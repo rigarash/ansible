@@ -104,6 +104,17 @@
       - strace
       - lsof
 
+  - name: install ansible related packages
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - ansible
+      - ansible-lint
+    when:
+      - "ansible_kernel is match('.*Microsoft$')"
+
   - name: install vim
     apt:
       name: "{{ packages }}"
