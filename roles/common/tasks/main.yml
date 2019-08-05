@@ -84,6 +84,16 @@
       - .msmtprc
       - .mutt
 
+  - name: create symlinks for reportbug on Debian
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/{{ item }}'
+      state: link
+    with_items:
+      - .reportbugrc
+    when:
+      - "ansible_os_family == 'Debian'"
+
   become: false
 
 - name: Setting for openssh
