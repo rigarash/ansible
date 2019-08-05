@@ -74,6 +74,16 @@
     with_items:
       - init.el
 
+  - name: create symlinks for mail
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/{{ item }}'
+      state: link
+    with_items:
+      - .signature.d
+      - .msmtprc
+      - .mutt
+
   become: false
 
 - name: Setting for openssh
