@@ -92,7 +92,7 @@
     with_items:
       - .reportbugrc
     when:
-      - "ansible_os_family == 'Debian'"
+      - "ansible_distribution == 'Debian'"
 
   become: false
 
