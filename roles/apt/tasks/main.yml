@@ -167,6 +167,16 @@
     when:
       - "ansible_distribution == 'Ubuntu'"
 
+  - name: install msmtp and mutt
+    apt:
+      name: '{{ packages }}'
+      state: latest
+    vars:
+      packages:
+      - mutt
+      - msmtp
+    become: true
+
   - name: install reportbug
     apt:
       name: "{{ packages }}"
