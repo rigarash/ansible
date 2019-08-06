@@ -25,7 +25,7 @@
       - glibc-doc
       - gdb-doc
 
-  - name: install libstdc++ documentation package (buster)
+  - name: install libstdc++ documentation package (buster/sid)
     apt:
       name: "{{ packages }}"
       state: latest
@@ -33,7 +33,7 @@
       packages:
       - libstdc++-8-doc
     when:
-      - "ansible_distribution_version is search('buster')"
+      - "ansible_distribution_version is search('buster|sid')"
 
   - name: install emacs packages
     apt:
@@ -105,7 +105,7 @@
     when:
       "ansible_kernel is not match('.*Microsoft$')"
 
-  - name: install Julia package (buster)
+  - name: install Julia package (buster/sid)
     apt:
       name: "{{ packages }}"
       state: latest
@@ -116,7 +116,7 @@
     notify:
       - add Julia packages
     when:
-      - "ansible_distribution_version is search('buster')"
+      - "ansible_distribution_version is search('buster|sid')"
 
   become: true
   when:
