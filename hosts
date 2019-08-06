@@ -6,14 +6,13 @@ localhost
 
 [server]
 microserver.rigarash.info
-ri-ml370g6.cspp.cc.u-tokyo.ac.jp
 
 [ricos]
 savanna.ritc.jp
 #jungle.ritc.jp
 
 [supercomputer]
-reedbush.cc.u-tokyo.ac.jp
+#reedbush.cc.u-tokyo.ac.jp
 
 [cluster:children]
 ricos
