@@ -69,7 +69,7 @@
       state: latest
     vars:
       packages:
-      - gpg-agent
+      - gnupg
       - pinentry-qt
       - dirmngr
     become: True

@@ -99,7 +99,7 @@
       - locales
       - openssh-client
       - rsync
-      - gpg
+      - gpg-agent
       - htop
       - strace
       - lsof
