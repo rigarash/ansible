@@ -167,6 +167,17 @@
     when:
       - "ansible_distribution == 'Ubuntu'"
 
+  - name: install reportbug
+    apt:
+      name: "{{ packages }}"
+      state: latest
+      install_recommends: yes
+    vars:
+      packages:
+      - reportbug
+    when:
+      - "ansible_distribution == 'Debian'"
+
   - name: change /etc/locale.gen properly
     lineinfile:
       dest: /etc/locale.gen
