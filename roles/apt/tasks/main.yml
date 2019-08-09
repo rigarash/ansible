@@ -111,6 +111,7 @@
     vars:
       packages:
       - ansible
+      - ansible-doc
       - ansible-lint
     when:
       - "ansible_kernel is match('.*Microsoft$')"
