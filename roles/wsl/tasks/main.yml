@@ -126,3 +126,16 @@
   when:
     - "ansible_kernel is match('.*Microsoft$')"
     - "ansible_os_family == 'Debian'"
+
+- name: ansible for windows host settings
+  block:
+
+  - name: prepare ConfigureRemotingForAnsible.ps1
+    shell: gunzip --stdout /usr/share/doc/ansible-doc/examples/scripts/ConfigureRemotingForAnsible.ps1.gz > /tmp/ConfigureRemotingForAnsible.ps1
+    args:
+      creates: /tmp/ConfigureRemotingForAnsible.ps1
+
+  become: false
+  when:
+    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_os_family == 'Debian'"
