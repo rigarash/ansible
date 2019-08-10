@@ -136,8 +136,7 @@
       creates: /tmp/ConfigureRemotingForAnsible.ps1
 
   - name: prepare winrm settings
-    command: powershell.exe -Command Start-Process powershell.exe -Verb RunAs -ArgumentList "\\\\wsl`$\\Debian\\tmp\\ConfigureRemotingForAnsible.ps1", "-EnableCredSSP", "-DisableBasicAuth", "-SkipNetworkProfileCheck"
-
+    command: powershell.exe -Command "Start-Process powershell.exe -Verb runAs -ArgumentList \"-ExecutionPolicy RemoteSigned\", '\\\\wsl\`$\\Debian\\tmp\\ConfigureRemotingForAnsible.ps1', \"-EnableCredSSP\", \"-DisableBasicAuth\", \"-SkipNetworkProfileCheck\""
 
   - name: install needed package for credssp
     apt:
