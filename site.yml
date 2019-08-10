@@ -38,3 +38,8 @@
         gather_subset: "!ohai"
   roles:
     - common
+
+- name: common settings for windows hosts
+  hosts: windows
+  roles:
+    - win
