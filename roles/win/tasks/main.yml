@@ -1,2 +1,17 @@
-- name: ansible on windows test
-  win_command: whoami
+- name: Install packages by Chocolatey
+  win_chocolatey:
+    name: '{{ packages }}'
+    state: latest
+  vars:
+    packages:
+    - 7zip
+    #- firefox
+    - sysinternals
+    #- google-backup-and-sync
+    #- vcxsrv
+    #- gpg4win
+    #- keepass
+    #- keepassxc
+    #- bitwarden
+    #- vscode
+    #- office365business
