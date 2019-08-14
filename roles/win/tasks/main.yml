@@ -5,13 +5,19 @@
   vars:
     packages:
     - 7zip
-    #- firefox
+    - firefox
+    #- googlechrome
     - sysinternals
-    #- google-backup-and-sync
-    #- vcxsrv
+    - google-backup-and-sync
+    - vcxsrv
     #- gpg4win
     #- keepass
     #- keepassxc
     #- bitwarden
-    #- vscode
-    #- office365business
+    - vscode
+    - office365business
+
+- name: Enable Windows Sandbox
+  win_command: powershell.exe -
+  args:
+    stdin: Start-Process powershell.exe -Verb runAs -ArgumentList "Enable-WindowsOptionalFeature", "-Online", "-All", "-Feature Containers-DisposableClientVM"
