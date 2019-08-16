@@ -18,6 +18,4 @@
     - office365business
 
 - name: Enable Windows Sandbox
-  win_command: powershell.exe -
-  args:
-    stdin: Start-Process powershell.exe -Verb runAs -ArgumentList "Enable-WindowsOptionalFeature", "-Online", "-All", "-Feature Containers-DisposableClientVM"
+  win_command: powershell.exe -ExecutionPolicy AllSigned Enable-WindowsOptionalFeature -FeatureName Containers-DisposableClientVM -Online -All
