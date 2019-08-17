@@ -20,4 +20,4 @@
 - name: Enable Windows Sandbox
   win_command: powershell.exe -
   args:
-    stdin: Enable-WindowsOptionalFeature -FeatureName Containers-DisposableClientVM -Online -All
+    stdin: Enable-WindowsOptionalFeature -FeatureName Containers-DisposableClientVM -Online -All -NoRestart
