@@ -92,6 +92,8 @@
     vars:
       packages:
       - aptitude
+      - apt-listchanges
+      #- apt-listbugs
       - host
       - iputils-ping
       - psmisc
