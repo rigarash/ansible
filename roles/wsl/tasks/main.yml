@@ -21,7 +21,19 @@
       state: present
       filename: 'gcp'
       update_cache: no
-    become: true
+
+  - name: Add Google Cloud Platform repository key
+    apt_key:
+      url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+      state: present
+
+  - name : Install Google Cloud Platform SDK
+    apt:
+      name: google-cloud-sdk
+      state: latest
+      update_cache: true
+
+  become: true
 
 - name: tmux settings
   block:
