@@ -12,6 +12,17 @@
   when:
     - "ansible_kernel is match('.*Microsoft$')"
 
+- name: Google Cloud Platform settings
+  block:
+
+  - name: Add Google Cloud Platform repository
+    apt_repository:
+      repo: 'deb http://packages.cloud.google.com/apt cloud-sdk-{{ ansible_distribution_release }} main'
+      state: present
+      filename: 'gcp'
+      update_cache: no
+    become: true
+
 - name: tmux settings
   block:
 
