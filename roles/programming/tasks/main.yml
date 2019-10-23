@@ -75,6 +75,7 @@
       - jupyter
       - python3-sklearn
       - python3-pandas
+      - python3-xlrd
       - python3-matplotlib
       - python-numpy-doc
       - python-scipy-doc
