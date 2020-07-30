@@ -105,6 +105,7 @@
       - htop
       - strace
       - lsof
+      - mlocate
 
   - name: install ansible related packages
     apt:
