@@ -9,6 +9,7 @@
       packages:
       - build-essential
       - gdb
+      - lldb
 
   - name: install documentation packages
     apt:
@@ -24,6 +25,7 @@
 #      - cpp-doc
       - glibc-doc
       - gdb-doc
+      -
 
   - name: install libstdc++ documentation package (buster/sid)
     apt:
@@ -33,7 +35,7 @@
       packages:
       - libstdc++-8-doc
     when:
-      - "ansible_distribution_version is search('buster|sid')"
+      - "ansible_distribution_release is search('buster|sid')"
 
   - name: install emacs packages
     apt:
@@ -59,12 +61,9 @@
       packages:
       - python3
       - python3-doc
-      - elpa-elpy
-      - elpa-jedi-core
-      - python3-autopep8
       - black
-      - pylama
-      - yapf3
+      - flake8
+      - python3-flake8-docstrings
 
   - name: install machine learning packages
     apt:
