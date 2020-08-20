@@ -91,6 +91,7 @@
       - clang
       - clang-format
       - clang-tidy
+      - clang-tools
       - iwyu
       - libboost-dev
       - libboost-doc
