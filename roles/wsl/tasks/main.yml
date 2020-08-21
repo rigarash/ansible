@@ -10,7 +10,7 @@
     become: true
 
   when:
-    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
 
 - name: Google Cloud Platform settings
   block:
