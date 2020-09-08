@@ -117,9 +117,9 @@
 
   - name: point IdentityAgent to gpg-agent
     lineinfile:
-      dest: '{{ ansible_env.HOME }}/.ssh/config'
+      dest: '{{ ansible_env.HOME }}/.ssh/conf.d/IdentityAgent.conf.last'
       regexp: '^\s*IdentityAgent'
-      line: '  IdentityAgent {{ sshsocket }}'
+      line: 'IdentityAgent {{ sshsocket }}'
       state: present
 
   become: false
