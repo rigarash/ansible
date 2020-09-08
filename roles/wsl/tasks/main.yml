@@ -48,7 +48,7 @@
     become: true
 
   when:
-    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
     - "ansible_os_family == 'Debian'"
 
 - name: font settings
@@ -71,7 +71,7 @@
     become: false
 
   when:
-    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
     - "ansible_os_family == 'Debian'"
 
 - name: GnuPG settings
@@ -124,7 +124,7 @@
 
   become: false
   when:
-    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
     - "ansible_os_family == 'Debian'"
 
 - name: Emacs settings
@@ -138,7 +138,7 @@
 
   become: false
   when:
-    - "ansible_kernel is match('.*Microsoft$')"
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
     - "ansible_os_family == 'Debian'"
 
 - name: ansible for windows host settings

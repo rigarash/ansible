@@ -5,11 +5,10 @@
     git:
       repo: 'ssh://git@github.com/rigarash/dotfiles.git'
       dest: '{{ ansible_env.HOME }}/.dotfiles'
-      version: 'master'
       update: yes
       accept_hostkey: yes
 
-  - name: move original various configuration files
+  - name: check status of various configuration files
     stat:
       path: '{{ ansible_env.HOME }}/{{ item }}'
     with_items:
@@ -21,7 +20,7 @@
       - .tmux.conf
     register: conffiles
 
-  - name: move original various configuration files
+  - name: backup original various configuration files
     command: mv '{{ ansible_env.HOME }}/{{ item.item }}' '{{ ansible_env.HOME }}/{{ item.item }}.orig'
     args:
       creates: '{{ ansible_env.HOME }}/{{ item.item }}.orig'
@@ -101,35 +100,58 @@
 - name: Setting for openssh
   block:
 
-  - name: create socket folders for openssh
+  - name: create folders for openssh
     file:
-      path:  '{{ ansible_env.HOME }}/.ssh/socket'
+      path:  '{{ ansible_env.HOME }}/.ssh/{{ item }}'
       state: directory
+    with_items:
+      - socket
+      - conf.d
 
-  - name: check whether current authorized_keys is symlink
+  - name: check status of ssh configuration files
     stat:
-      path: '{{ ansible_env.HOME }}/.ssh/authorized_keys'
-    register: ssh_keys
-
-  - name: remove current authorized_keys when symlink
-    file:
-      path: '{{ ansible_env.HOME }}/.ssh/authorized_keys'
-      state: absent
-      follow: no
-    when:
-      - ssh_keys.stat.islnk is defined
-      - ssh_keys.stat.islnk
-      - ssh_keys.stat.lnk_source is not search('\.dotfiles')
-
-  - name: copy openssh configuration files
-    copy:
-      src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item }}'
-      dest: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
-      remote_src: yes
-      backup: yes
+      path: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
     with_items:
       - config
       - authorized_keys
+    register: ssh_conf
+
+  - name: backup current ssh configuration files
+    command: mv '{{ ansible_env.HOME }}/.ssh/{{ item.item }}' '{{ ansible_env.HOME }}/.ssh/{{ item.item }}.orig'
+    args:
+      creates: '{{ ansible_env.HOME }}/.ssh/{{ item.item }}.orig'
+      removes: '{{ ansible_env.HOME }}/.ssh/{{ item.item }}'
+    when:
+      - item.stat is defined
+      - item.stat.isreg is defined
+      - item.stat.isreg
+      - item.stat.islnk is defined
+      - not item.stat.islnk
+    with_items:
+      - '{{ ssh_conf.results }}'
+
+  - name: create symlinks of ssh configuration files
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/.ssh/{{ item.item }}'
+      dest: '{{ ansible_env.HOME }}/.ssh/{{ item.item }}'
+      state: link
+    with_items:
+      - '{{ ssh_conf.results }}'
+
+  - name: check status of ssh split configuration files
+    find:
+      paths: '{{ ansible_env.HOME }}/.dotfiles/.ssh/conf.d'
+      patterns: '*.conf'
+      recurse: no
+    register: ssh_split_conf
+
+  - name: create symlinks of ssh split configuration files
+    file:
+      src:  '{{ ansible_env.HOME}}/.dotfiles/.ssh/conf.d/{{ item.item }}'
+      dest: '{{ ansible_env.HOME}}/.ssh/conf.d'
+      state: link
+    with_items:
+      - '{{ ssh_split_conf.files }}'
 
   - name: check openssh private keys
     stat:
@@ -146,6 +168,7 @@
       state: absent
       follow: no
     when:
+      - item.stat is defined
       - item.stat.islnk is defined
       - item.stat.islnk
       - item.stat.lnk_source is not search( ansible_env.USERPROFILE + '/home/ssh_private/' + item.item )

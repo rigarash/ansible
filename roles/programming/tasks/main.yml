@@ -25,7 +25,6 @@
 #      - cpp-doc
       - glibc-doc
       - gdb-doc
-      -
 
   - name: install libstdc++ documentation package (buster/sid)
     apt:
