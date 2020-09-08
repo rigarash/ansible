@@ -147,11 +147,11 @@
 
   - name: create symlinks of ssh split configuration files
     file:
-      src:  '{{ ansible_env.HOME}}/.dotfiles/.ssh/conf.d/{{ item.item }}'
-      dest: '{{ ansible_env.HOME}}/.ssh/conf.d'
+      src:  '{{ item }}'
+      dest: '{{ ansible_env.HOME }}/.ssh/conf.d/{{ item | basename }}'
       state: link
     with_items:
-      - '{{ ssh_split_conf.files }}'
+      - '{{ ssh_split_conf.files | map(attribute="path") | list }}'
 
   - name: check openssh private keys
     stat:
