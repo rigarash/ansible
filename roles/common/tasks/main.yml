@@ -74,6 +74,7 @@
       state: link
     with_items:
       - init.el
+      - custom.el
 
   - name: create symlinks for mail
     file:
