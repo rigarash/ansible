@@ -46,6 +46,7 @@
       - .zsh.d
       - .zshrc
       - .tmux.conf
+      - .aspell.conf
 
   - name: change .gitconfig on RICOS
     file:
