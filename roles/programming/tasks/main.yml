@@ -46,7 +46,7 @@
       - elpa-migemo
       - elpa-magit
       - elpa-yaml-mode
-      - elpa-company-lsp
+      - elpa-company
       - elpa-counsel
       - elpa-lsp-ui
       - aspell
