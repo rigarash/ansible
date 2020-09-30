@@ -141,6 +141,22 @@
     - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
     - "ansible_os_family == 'Debian'"
 
+- name: WSL misc settings
+  block:
+
+  - name: create symlinks of script files
+    file:
+      src:  '{{ ansible_env.HOME }}/.dotfiles/bin/{{ item }}'
+      dest: '{{ ansible_env.HOME }}/bin/{{ item }}'
+      state: link
+    with_items:
+      - open
+
+  become: false
+  when:
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
+    - "ansible_os_family == 'Debian'"
+    
 - name: ansible for windows host settings
   block:
 
