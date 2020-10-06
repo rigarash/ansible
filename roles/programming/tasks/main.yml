@@ -26,7 +26,7 @@
       - glibc-doc
       - gdb-doc
 
-  - name: install libstdc++ documentation package (buster/sid)
+  - name: install libstdc++ documentation package (buster)
     apt:
       name: "{{ packages }}"
       state: latest
@@ -34,7 +34,17 @@
       packages:
       - libstdc++-8-doc
     when:
-      - "ansible_distribution_release is search('buster|sid')"
+      - "ansible_distribution_release is search('buster')"
+
+  - name: install libstdc++ documentation package (sid)
+    apt:
+      name: "{{ packages }}"
+      state: latest
+    vars:
+      packages:
+      - libstdc++-10-doc
+    when:
+      - "ansible_distribution_release is search('sid')"
 
   - name: install emacs packages
     apt:
