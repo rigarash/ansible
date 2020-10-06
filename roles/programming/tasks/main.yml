@@ -49,10 +49,10 @@
       - elpa-company-lsp
       - elpa-counsel
       - elpa-lsp-ui
+      - elpa-which-key
       - aspell
       - aspell-en
       - aspell-doc
-      - global
 
   - name: install python3 packages
     apt:
