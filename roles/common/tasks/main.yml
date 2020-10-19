@@ -186,11 +186,20 @@
     with_items:
       - '{{ private_keys.results }}'
 
-  - name: fixing mode of .ssh/config
+  - name: fixing mode of .ssh
     file:
-      path: '{{ ansible_env.HOME }}/.ssh/config'
-      mode: '600'
+      path: '{{ ansible_env.HOME }}/.ssh'
+      mode: 'g-w,o-w'
       follow: yes
+
+  - name: fixing mode of public key related files in .ssh
+    file:
+      path: '{{ ansible_env.HOME }}/.ssh/{{ item }}'
+      mode: 'g-w,o-w'
+      follow: yes
+    with_items:
+      - config
+      - authorized_keys
 
   - name: find location of gpg-agent socket
     command: /bin/zsh -c "gpgconf --list-dirs agent-socket"
