@@ -18,6 +18,7 @@
       - .zsh.d
       - .zshrc
       - .tmux.conf
+      - .emacs
     register: conffiles
 
   - name: backup original various configuration files
