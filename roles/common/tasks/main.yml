@@ -42,6 +42,7 @@
       state: link
     with_items:
       - .gitconfig
+      - .gitignore.global
       - .dircolors
       - .python_startup
       - .zsh.d
