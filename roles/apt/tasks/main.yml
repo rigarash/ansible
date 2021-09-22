@@ -103,9 +103,11 @@
       - rsync
       - gpg-agent
       - htop
+      - iotop-c
       - strace
       - lsof
       - mlocate
+      - doas
 
   - name: install ansible related packages
     apt:
