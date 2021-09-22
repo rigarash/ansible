@@ -108,6 +108,7 @@
       - iwyu
       - libboost-dev
       - libboost-doc
+      - cmake-format
 
   - name: install performance analysis packages
     apt:
