@@ -85,6 +85,7 @@
       packages:
       - gnupg
       - pinentry-qt
+      - qtwayland
       - dirmngr
     become: True
 
