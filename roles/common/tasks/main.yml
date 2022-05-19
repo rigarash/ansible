@@ -50,14 +50,6 @@
       - .tmux.conf
       - .aspell.conf
 
-  - name: change .gitconfig on RICOS
-    file:
-      src:  '{{ ansible_env.HOME }}/.dotfiles/.gitconfig-ricos'
-      dest: '{{ ansible_env.HOME }}/.gitconfig'
-      state: link
-    when:
-      - "'ricos' in group_names"
-
   - name: change shell to zsh
     user:
       name: rigarash
