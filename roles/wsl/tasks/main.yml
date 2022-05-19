@@ -34,6 +34,9 @@
       update_cache: true
 
   become: true
+  when:
+    - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
+    - "ansible_os_family == 'Debian'"
 
 - name: tmux settings
   block:
@@ -72,7 +75,6 @@
 
   when:
     - "ansible_kernel is match('.*[mM]icrosoft(-standard)?$')"
-    - "ansible_os_family == 'Debian'"
 
 - name: GnuPG settings
   block:
